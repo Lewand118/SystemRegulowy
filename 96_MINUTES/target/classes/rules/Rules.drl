@@ -1,0 +1,525 @@
+package com.sample
+import javax.swing.*;
+import java.awt.*;
+import com.sample.Main.*;
+ 
+rule "start"
+	when
+	then
+		//ConfirmDialog cdframe = new ConfirmDialog();
+		String question = "Drama or comedy?";
+		String[] answers = {"drama", "a little of both", "comedy"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+
+rule "start again"
+	when
+		Rule(q.equals("You done?"), a.equals("Try again"));
+	then
+		String question = "Drama or comedy?";
+		String[] answers = {"drama", "a little of both", "comedy"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+
+rule "drama"
+	when
+		Rule(q.equals("Drama or comedy?"), a.equals("drama"));
+	then
+		String question = "Do you like sci-fi or supernatural shows?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "both"
+	when
+		Rule(q.equals("Drama or comedy?"), a.equals("a little of both"));
+	then
+		String question = "Small town or prison?";
+		String[] answers = {"small town", "prison"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "comedy"
+	when
+		Rule(q.equals("Drama or comedy?"), a.equals("comedy"));
+	then
+		String question = "Do you like your characters to have questionable morals";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+
+rule "gore"
+	when
+		Rule(q.equals("Do you like sci-fi or supernatural shows?"), a.equals("yes"));
+	then
+		String question = "Can you handle gore?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "politics"
+	when
+		Rule(q.equals("Do you like sci-fi or supernatural shows?"), a.equals("no"));
+	then
+		String question = "Politics?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+
+rule "small town"
+	when
+		Rule(q.equals("Small town or prison?"), a.equals("small town"));
+	then
+		String question = "Selected TV show";
+		String answer = "Gilmore girl (4 days 16 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "prison"
+	when
+		Rule(q.equals("Small town or prison?"), a.equals("prison"));
+	then
+		String question = "Selected TV show";
+		String answer = "OITNB (23 hrs)";
+		insert(new Rule(question, answer));
+end
+
+rule "morals no"
+	when
+		Rule(q.equals("Do you like your characters to have questionable morals"), a.equals("no"));
+	then
+		String question = "Do you like strong female characters";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "morals yes"
+	when
+		Rule(q.equals("Do you like your characters to have questionable morals"), a.equals("yes"));
+	then
+		String question = "Friend group or dysfunctional family?";
+		String[] answers = {"friends", "family"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+
+rule "friends"
+	when
+		Rule(q.equals("Friend group or dysfunctional family?"), a.equals("friends"));
+	then
+		String question = "Selected TV show";
+		String answer = "It's always sunny in Philadelphia (1 day 14 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "family"
+	when
+		Rule(q.equals("Friend group or dysfunctional family?"), a.equals("family"));
+	then
+		String question = "Selected TV show";
+		String answer = "Arrested development (1 day 1 hr)";
+		insert(new Rule(question, answer));
+end
+
+rule "stronf female character yes"
+	when
+		Rule(q.equals("Do you like strong female characters"), a.equals("yes"));
+	then
+		String question = "Do you like them to sell drugs?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "stronf female character no"
+	when
+		Rule(q.equals("Do you like strong female characters"), a.equals("no"));
+	then
+		String question = "Work place humor?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "work humor yes"
+	when
+		Rule(q.equals("Work place humor?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "The office (3 days 5 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "drugs yes"
+	when
+		Rule(q.equals("Do you like them to sell drugs?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "Weeds (3 days 4 hrs)";
+		insert(new Rule(question, answer));
+end
+
+rule "drugs no"
+	when
+		Rule(q.equals("Do you like them to sell drugs?"), a.equals("no"));
+	then
+		String question = "Tina Fey or Amy Poehler?";
+		String[] answers = {"Tina", "Amy"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "tina"
+	when
+		Rule(q.equals("Tina Fey or Amy Poehler?"), a.equals("Tina"));
+	then
+		String question = "Selected TV show";
+		String answer = "30 rock (2 days 2 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "amy"
+	when
+		Rule(q.equals("Tina Fey or Amy Poehler?"), a.equals("Amy"));
+	then
+		String question = "Selected TV show";
+		String answer = "Park & Recreation (1 day 18 hrs)";
+		insert(new Rule(question, answer));
+end
+
+rule "work humor no"
+	when
+		Rule(q.equals("Work place humor?"), a.equals("no"));
+	then
+		String question = "Want to see James Franco & Seth Rogen as high schoolers?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "schoolers yes"
+	when
+		Rule(q.equals("Want to see James Franco & Seth Rogen as high schoolers?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "Freaks & Geeks (14 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "schoolers no"
+	when
+		Rule(q.equals("Want to see James Franco & Seth Rogen as high schoolers?"), a.equals("no"));
+	then
+		String question = "Do you want your nyc friends to hang out at a bar or cafe?";
+		String[] answers = {"bar", "cafe"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "bar"
+	when
+		Rule(q.equals("Do you want your nyc friends to hang out at a bar or cafe?"), a.equals("bar"));
+	then
+		String question = "Selected TV show";
+		String answer = "How I met your mother (3 days 2 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "cafe"
+	when
+		Rule(q.equals("Do you want your nyc friends to hang out at a bar or cafe?"), a.equals("cafe"));
+	then
+		String question = "Selected TV show";
+		String answer = "Friends (3 days 14 hrs)";
+		insert(new Rule(question, answer));
+end
+
+rule "gore yes"
+	when
+		Rule(q.equals("Can you handle gore?"), a.equals("yes"));
+	then
+		String question = "Do you like zombies?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "gore no"
+	when
+		Rule(q.equals("Can you handle gore?"), a.equals("no"));
+	then
+		String question = "British characters?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "zombies"
+	when
+		Rule(q.equals("Do you like zombies?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "The walking dead (1 day 15 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "zombies no"
+	when
+		Rule(q.equals("Do you like zombies?"), a.equals("no"));
+	then
+		String question = "Vampires?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "vampires yes"
+	when
+		Rule(q.equals("Vampires?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "The vampire diaries (3 days 6 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "vampires no"
+	when
+		Rule(q.equals("Vampires?"), a.equals("no"));
+	then
+		String question = "Selected TV show";
+		String answer = "Supernatural (6 days 1 hr)";
+		insert(new Rule(question, answer));
+end
+rule "british no"
+	when
+		Rule(q.equals("British characters?"), a.equals("no"));
+	then
+		String question = "Selected TV show";
+		String answer = "Lost (3 days 18 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "british yes"
+	when
+		Rule(q.equals("British characters?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "Dr. Who (15 days 12 hrs)";
+		insert(new Rule(question, answer));
+end
+
+rule "politics yes"
+	when
+		Rule(q.equals("Politics?"), a.equals("yes"));
+	then
+		String question = "Need action?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "action yes"
+	when
+		Rule(q.equals("Need action?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "24 (6 days 2 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "action no"
+	when
+		Rule(q.equals("Need action?"), a.equals("no"));
+	then
+		String question = "Scandalous romance?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "romance yes"
+	when
+		Rule(q.equals("Scandalous romance?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "Scandal (1 day 8 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "romance no"
+	when
+		Rule(q.equals("Scandalous romance?"), a.equals("no"));
+	then
+		String question = "Optimistic or cynical?";
+		String[] answers = {"optimistic", "cynical"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "optimistic"
+	when
+		Rule(q.equals("Optimistic or cynical?"), a.equals("optimistic"));
+	then
+		String question = "Selected TV show";
+		String answer = "The west wind (4 days 20 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "cynical"
+	when
+		Rule(q.equals("Optimistic or cynical?"), a.equals("cynical"));
+	then
+		String question = "Selected TV show";
+		String answer = "House of cards (1 day 9 hrs)";
+		insert(new Rule(question, answer));
+end 
+
+rule "politics no"
+	when
+		Rule(q.equals("Politics?"), a.equals("no"));
+	then
+		String question = "Feel like crying?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "crying yes"
+	when
+		Rule(q.equals("Feel like crying?"), a.equals("yes"));
+	then
+		String question = "Do you like football?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "football yes"
+	when
+		Rule(q.equals("Do you like football?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "Friday night lights (2 days 8 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "football no"
+	when
+		Rule(q.equals("Do you like football?"), a.equals("no"));
+	then
+		String question = "Hospitals?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "hospitals no"
+	when
+		Rule(q.equals("Hospitals?"), a.equals("no"));
+	then
+		String question = "Selected TV show";
+		String answer = "Parenthood (2 days 16 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "hospitals yes"
+	when
+		Rule(q.equals("Hospitals?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "Grey's anatomy (6 days 16 hrs)";
+		insert(new Rule(question, answer));
+end
+
+rule "crying no"
+	when
+		Rule(q.equals("Feel like crying?"), a.equals("no"));
+	then
+		String question = "Do you like crime shows?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "crime shows yes"
+	when
+		Rule(q.equals("Do you like crime shows?"), a.equals("yes"));
+	then
+		String question = "Do you root for the criminals?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "root criminals yes"
+	when
+		Rule(q.equals("Do you root for the criminals?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "Dexter (6 days)";
+		insert(new Rule(question, answer));
+end
+rule "root criminals no"
+	when
+		Rule(q.equals("Do you root for the criminals?"), a.equals("no"));
+	then
+		String question = "Forensics or psychology?";
+		String[] answers = {"forensics", "psychology"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "forensics"
+	when
+		Rule(q.equals("Forensics or psychology?"), a.equals("forensics"));
+	then
+		String question = "Selected TV show";
+		String answer = "CSI: Miami (6 days 22 hrs)";
+		insert(new Rule(question, answer));
+end
+rule "psychology"
+	when
+		Rule(q.equals("Forensics or psychology?"), a.equals("psychology"));
+	then
+		String question = "Selected TV show";
+		String answer = "Criminal minds (6 days 6 hrs)";
+		insert(new Rule(question, answer));
+end
+
+rule "crime shows no"
+	when
+		Rule(q.equals("Do you like crime shows?"), a.equals("no"));
+	then
+		String question = "Meth?";
+		String[] answers = {"yes", "no"};
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		int option = JOptionPane.showOptionDialog(null, question, "Choose your preferences", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule(question, answers[option]));
+end
+rule "meth yes"
+	when
+		Rule(q.equals("Meth?"), a.equals("yes"));
+	then
+		String question = "Selected TV show";
+		String answer = "Breaking bad (2 days)";
+		insert(new Rule(question, answer));
+end
+rule "meth no"
+	when
+		Rule(q.equals("Meth?"), a.equals("no"));
+	then
+		String question = "Selected TV show";
+		String answer = "Mad men (2 days 9 hrs)";
+		insert(new Rule(question, answer));
+end
+
+
+rule "stop"
+	when
+		r : Rule(q.equals("Selected TV show"));
+	then
+		//ConfirmDialog cdframe = new ConfirmDialog();
+		ImageIcon icon = new ImageIcon("../96_MINUTES/netflix.png");
+		String[] answers = {"OK", "Try again"};
+		int option = JOptionPane.showOptionDialog(null, r.a, r.q, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, answers, null);
+		insert(new Rule("You done?", answers[option]));
+end
